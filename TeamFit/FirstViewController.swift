@@ -80,12 +80,12 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    //this is where all the speed and distance calculations are done
     func locationManager(manager: CLLocationManager!,
         didUpdateToLocation newLocation: CLLocation!,
         fromLocation oldLocation: CLLocation!){
             if (oldLocation != nil) {
                 calibration = false
-                print("boool is " + doOnce.description)
                 var gpsSpeed = newLocation.speed
                 var distanceChange = newLocation.distanceFromLocation(oldLocation)
                 var sinceLastUpdate = newLocation.timestamp.timeIntervalSinceDate(oldLocation.timestamp)
@@ -94,7 +94,6 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate {
                 var distanceTraveled =
                     newLocation.distanceFromLocation(firstLocation)
                 if mphSpeed == 0  && calibrationCompleted == false{
-                    print("wewrwe")
                     if calibration == false{
                         calibration = true
                     }
@@ -105,8 +104,6 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate {
                     }
                     
                 }
-                print(firstLocation.description)
-                print(NSString(format:"you are moving at %.2f m/s \n",calculatedSpeed))
                 speedLabel.text = (NSString(format: "You are moving at %.2f m/s \n", calculatedSpeed))
                 mphLabel.text = (NSString(format: "You are moving at %.2f mph \n", mphSpeed))
                 distanceTraveledLabel.text =
@@ -122,8 +119,6 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate {
             longitude = "\(newLocation.coordinate.longitude)"
             var locationPair = [latitude,longitude];
             locationStack += locationPair
-            println("Latitude = \(newLocation.coordinate.latitude)")
-            println("Longitude = \(newLocation.coordinate.longitude)")
             
     }
     func accelData(){
